@@ -12,7 +12,7 @@ use rust_embed::RustEmbed;
 mod mime_mapper;
 
 /// true: redirect directory paths to /
-/// false: use /index.html content for no index.html in sub-directories (b/ or b/index.html)
+/// false: use /index.html content for no index.html in sub-directories (a/ or a/index.html)
 const REDIRECT_INDEX: bool = true;
 
 const SERVER_ADDRESS: &str = "0.0.0.0:8800";

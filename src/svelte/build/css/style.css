@@ -1,0 +1,38 @@
+body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+}
+
+section {
+    margin-bottom: 1rem;
+}
+
+.center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.img-center {
+    height: 250px;
+    margin: auto;
+    max-width: 100%;
+}
+
+.sample {
+    color: blue;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 1rem;
+    padding-top: 1rem;
+}

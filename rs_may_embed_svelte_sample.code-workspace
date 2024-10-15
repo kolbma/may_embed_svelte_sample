@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"fill-labs.dependi",
+			"vadimcn.vscode-lldb",
+			"tamasfe.even-better-toml",
+			"rust-lang.rust-analyzer"
+		]
+	}
+}

@@ -59,7 +59,7 @@ pub(crate) fn mime_map(mime: &mime_guess::Mime) -> &'static str {
         "text/javascript" => "Content-Type: text/javascript",
         "text/plain" => "Content-Type: text/plain",
         "text/xml" => "Content-Type: text/xml",
-        _ => "Content-Type: application/octet-stream",
+        _ => CT_APPLICATION_OCTET_STREAM,
     }
 }
 

@@ -23,7 +23,6 @@ struct Assets;
 
 struct Router;
 
-#[allow(clippy::match_single_binding)]
 impl mayhttp::HttpService for Router {
     fn call(
         &mut self,

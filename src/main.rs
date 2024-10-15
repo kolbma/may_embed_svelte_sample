@@ -63,8 +63,7 @@ impl mayhttp::HttpService for Router {
             let content_type = MimeMapper::instance()
                 .get_or_insert(mime_guess::from_path(&path).first_or_octet_stream());
             // or:
-            // let content_type =
-            //     mime_mapper::mime_map(&mime_guess::from_path(&path).first_or_octet_stream());
+            // let content_type = mime_mapper::mime_map(&path);
             rsp.header(content_type)
                 .body_mut()
                 .extend_from_slice(&content.data);

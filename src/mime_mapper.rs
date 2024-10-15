@@ -49,16 +49,22 @@ impl MimeMapper {
 /// Needs to be extended for the required mime types.
 #[inline]
 #[allow(dead_code)]
-pub(crate) fn mime_map(mime: &mime_guess::Mime) -> &'static str {
-    match mime.as_ref() {
-        "text/html" => "Content-Type: text/html; charset=utf-8",
-        "image/jpeg" => "Content-Type: image/jpeg",
-        "image/png" => "Content-Type: image/png",
-        "image/svg+xml" => "Content-Type: image/svg+xml",
-        "text/css" => "Content-Type: text/css",
-        "text/javascript" => "Content-Type: text/javascript",
-        "text/plain" => "Content-Type: text/plain",
-        "text/xml" => "Content-Type: text/xml",
+pub(crate) fn mime_map(path: &str) -> &'static str {
+    match path
+        .rsplit_once('.')
+        .unwrap_or(("", ""))
+        .1
+        .to_lowercase()
+        .as_str()
+    {
+        "html" => "Content-Type: text/html; charset=utf-8",
+        "jpg" | "jpeg" => "Content-Type: image/jpeg",
+        "png" => "Content-Type: image/png",
+        "svg" => "Content-Type: image/svg+xml",
+        "css" => "Content-Type: text/css",
+        "js" => "Content-Type: text/javascript",
+        "txt" => "Content-Type: text/plain",
+        "xml" => "Content-Type: text/xml",
         _ => CT_APPLICATION_OCTET_STREAM,
     }
 }
@@ -72,7 +78,7 @@ mod tests {
         let extensions = ["jpg", "png", "svg", "xml", "html", "txt", "js", "css"];
 
         for (n, ext) in extensions.iter().enumerate() {
-            let ct = mime_map(&mime_guess::from_ext(ext).first_or_octet_stream());
+            let ct = mime_map(&("some/a/b/file.".to_string() + ext));
             let ct_start = if n <= 2 { "image/" } else { "text/" };
             assert!(
                 ct.starts_with(&("Content-Type: ".to_string() + ct_start)),
@@ -80,10 +86,7 @@ mod tests {
             );
         }
 
-        assert_eq!(
-            mime_map(&mime_guess::from_ext("bin").first_or_octet_stream()),
-            CT_APPLICATION_OCTET_STREAM
-        );
+        assert_eq!(mime_map("some/a/b/file.bin"), CT_APPLICATION_OCTET_STREAM);
     }
 
     #[test]
